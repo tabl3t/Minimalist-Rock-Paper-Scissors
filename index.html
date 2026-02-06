@@ -1,0 +1,77 @@
+<div class="game-container">
+  <h1>Rock Paper Scissors</h1>
+  <link rel="stylesheet" href="style.css">
+  <div class="score-board">
+    <div class="score-box">
+      <p>YOU</p>
+      <span id="user-score">0</span>
+    </div>
+    <div class="score-box">
+      <p>COMPUTER</p>
+      <span id="com-score">0</span>
+    </div>
+  </div>
+  
+  <div class="result-area">
+    <h2 id="result-text">Choose your weapon!</h2>
+    <p id="battle-details">... vs ...</p>
+  </div>
+  
+  <div class="buttons">
+    <button id="rockbtn" class="choice-btn">✊ Rock</button>
+    <button id="paperbtn" class="choice-btn">✋ Paper</button>
+    <button id="scissorbtn" class="choice-btn">✌️ Scissor</button>
+  </div>
+  <script>
+let userScoreText = document.getElementById("user-score");
+let comScoreText = document.getElementById("com-score");
+let resultText = document.getElementById("result-text");
+let battleDetails = document.getElementById("battle-details");
+
+let rockBtn = document.getElementById("rockbtn");
+let paperBtn = document.getElementById("paperbtn");
+let scissorBtn = document.getElementById("scissorbtn");
+
+let userScore = 0;
+let compScore = 0;
+
+function playGame(userChoice){
+  let options = ["Rock","Paper","Scissor"];
+  let randomIndex = Math.floor(Math.random()*3);
+  let comChoice = options[randomIndex];
+  
+  battleDetails.innerText = userChoice + " vs " + comChoice;
+  
+  if(userChoice === comChoice){
+    resultText.innerText = "It's a draw!";
+    resultText.style.color = "yellow";
+  } else if((userChoice === "Rock" && comChoice === "Scissor") ||
+    (userChoice === "Paper" && comChoice === "Rock") ||
+    (userChoice === "Scissor" && comChoice === "Paper"))
+{
+  resultText.innerText = "You win!"
+  resultText.style.color = "#2ecc71";
+  userScore++;
+  userScoreText.innerText = userScore;
+} else {
+  resultText.innerText = "You Lose!";
+  resultText.style.color = "#e74c3c";
+  compScore++;
+  comScoreText.innerText = compScore;
+}
+}
+  
+rockBtn.addEventListener("click", function() {
+  playGame("Rock");
+});
+
+paperBtn.addEventListener("click", function() {
+  playGame("Paper");
+});
+
+scissorBtn.addEventListener("click", function() {
+  playGame("Scissor");
+});
+</script>
+
+ </div>
